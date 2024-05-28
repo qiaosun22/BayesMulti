@@ -1,3 +1,4 @@
+
 # BayesMulti: A Baysian Fault Tolerance Neural Network Searching Algorithm Designed for Memristor-based Neuromorphic Computing
 
 ## Introduction
@@ -45,21 +46,20 @@ More details can be found in our paper.
    |--train_Alexnet_cifar10_erm.py
    |--test_Alexnet_cifar10.py
 ```
-
 In this repository, each sub directory are explained by:
 
-| Sub Dir Name   | Explanation                                                                                                                                                                  |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| configs        | The config file which determine each experiments' hyper-parameters settings.                                                                                                 |
-| experiments    | The codes for highest-level APIs of experiments in our paper. Each experiment is entitled by its model and dataset used.                                                     |
-| dataloaders    | This is an API designed for loading and managing different datsets uniformly.                                                                                                |
-| models         | This is where we define different versions of models (ERM, BayesFT, or Multinomial BayesFT), as well as an API designed for loading and managing different models uniformly. |
-| utils          | The indispensable utils to support training, testing and data-loading while keep the main code logic neat and clear.                                                         |
-| saved_ckpts    | Check points of model weights saved for easy problem checking, continuous training, and fast verification.                                                                   |
-| hardware_noise | The processing and analysis of real memristor Current-Volta cycle data, where the noise character are modeled by a MLE method.                                               |
+|Sub Dir Name|Explanation|
+|---|---|
+|configs|The config file which determine each experiments' hyper-parameters settings. |
+|experiments|The codes for highest-level APIs of experiments in our paper. Each experiment is entitled by its model and dataset used. |
+|dataloaders|This is an API designed for loading and managing different datsets uniformly.|
+|models|This is where we define different versions of models (ERM, BayesFT, or Multinomial BayesFT), as well as an API designed for loading and managing different models uniformly.|
+|utils|The indispensable utils to support training, testing and data-loading while keep the main code logic neat and clear. |
+|saved_ckpts|Check points of model weights saved for easy problem checking, continuous training, and fast verification. |
+|hardware_noise| The processing and analysis of real memristor Current-Volta cycle data, where the noise character are modeled by a MLE method.|   
+
 
 ## Environment
-
 ```
 OS: Ubuntu 23.10
 # Name                    Version                   Build  Channel
@@ -78,21 +78,18 @@ pip install -r requirments.txt
 ```
 
 ## Use Cases
-
 Given the `Cifar-10` dataset (Krizhevsky et al., 2012) and `AlexNet` model (Krizhevsky, A., 2009) as an example, we can demonstrate the effectness of our method simply by following the subsequent steps:
-
 ### Train an ERM Model
-
 As for training an ERM model, it is the ordinary way we train a neiral network. You can simply run the following command:
+
 
 ```
 python ./experiments/train_Alexnet_cifar10_erm.py --weight_save_path ./saved_ckpts/Alexnet_cifar10_erm.pth --num_epochs_Adam 40
 ```
-
 In this example, the script will load the model, train it on CIFAR10 dataset, and save the model weights.
 
-### Train a Multinomial Fault Tolerance Model
 
+### Train a Multinomial Fault Tolerance Model
 The training for a Multinomial Fault Tolerance Model involves with a Bayesian Optimisation (Nogueira, F., 2014)) and in each Bayesian Optimization the model is initialised and then trained for certain epochs. With the Bayesian Optimisation going, the dropout rate is optimised so that the better noise-robust network architecture is found. 
 
 Run the following code in your shell:
@@ -110,16 +107,14 @@ python ./experiments/train_Alexnet_cifar10_multi.py --weight_save_path ./saved_c
 ```
 
 ### Test the noise robustness of both ERM and Multinomial Moddels
-
 For simplicity, by default you can directly run:
-
 ```
 python ./experiments/test_Alexnet_cifar10.py
 ```
-
 where the script `./experiments/test_Alexnet_cifar10.py` tests the noise robustness of different models by evaluating their performance with added hardware noise. It also processes and plots the results to visualize the robustness of each model. 
 
 ![alt text](experiments/saved_imgs/_noise_robustness.png)
+
 
 In the following your can find a more detailed general template for parameter settin:  
 
@@ -135,10 +130,13 @@ python test_noise_robustness.py --weight_path_erm path/to/your/cnn_erm.pth --wei
 --N_trials: Number of trials for each noise file (default: 10).
 --seed: Random seed for reproducibility (default: 666).
 --img_save_path: Path to save the output plot image.
+
 ```
 
-## References
 
+
+
+## References
 Krizhevsky, A. (2009) 'Learning Multiple Layers of Features from Tiny Images', available at: https://www.cs.toronto.edu/~kriz/learning-features-2009-TR.pdf (Accessed: 28 May 2024).
 
 Nogueira, F. (2014) 'Bayesian Optimization: Open source constrained global optimization tool for Python', available at: https://github.com/bayesian-optimization/BayesianOptimization (Accessed: 28 May 2024).
@@ -147,10 +145,11 @@ Krizhevsky, A., Sutskever, I. and Hinton, G.E. (2012) 'ImageNet Classification w
 
 Duan, X., Cao, Z., Gao, K., Yan, W., Sun, S., Zhou, G., Wu, Z., Ren, F. and Sun, B., 2024. Memristor‐Based Neuromorphic Chips. Advanced materials, p.2310704.
 
+
 ## Cite this repository
 
 If you find this repository helpful, please cite it by:
-
+```
 @misc{BayesMulti2024,
   author = {Qiao Sun},
   title = {BayesMulti: A Bayesian Fault Tolerance Neural Network Searching Algorithm Designed for Memristor-based Neuromorphic Computing},
@@ -158,4 +157,6 @@ If you find this repository helpful, please cite it by:
   howpublished = {\url{https://github.com/qiaosun22/BayesMulti}},
   note = {Accessed: 28 May 2024}
 }
-# BayesMulti
+```
+## License
+Under [MIT Lisence](https://opensource.org/license/mit). 
